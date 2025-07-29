@@ -1,9 +1,9 @@
 # geode-download-dependency-cmake
 A helper CMake function that allows Geode mod developers to use dependency mods from their latest GitHub release. Useful when the dependency is not published in the official Geode index. Solution is cross-platform and supports Geode Mod Build workflows.
 
-## Usage
+## Usage Example
 ```cmake
-file(DOWNLOAD "https://raw.githubusercontent.com/user95401/geode-download-dependency-cmake/refs/heads/main/.cmake" 
+file(DOWNLOAD "https://github.com/user95401/geode-download-dependency-cmake/blob/main/.cmake?raw=true" 
     ${CMAKE_CURRENT_BINARY_DIR}/geode-download-dependency.cmake)
 include(${CMAKE_CURRENT_BINARY_DIR}/geode-download-dependency.cmake)
 
