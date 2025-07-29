@@ -1,5 +1,5 @@
 # geode-download-dependency-cmake
-A helper CMake function that allows Geode mod developers to automatically download and use dependency mods from their latest GitHub releases when the dependency is not published in the official Geode index.
+A helper CMake function that allows Geode mod developers to use dependency mods from their latest GitHub release. Useful when the dependency is not published in the official Geode index. Solution is cross-platform and supports Geode Mod Build workflows.
 
 ## Usage
 ```cmake
