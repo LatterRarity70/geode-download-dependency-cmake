@@ -1,15 +1,15 @@
 # A helper function to download Geode mod dependencies from GitHub releases
 # Usage:
-#   download_dependency_mod(owner/repo-name mod.id [CREATE_JSON])
+#   download_dependency_mod(owner/repo-name mod.id [REQUIRED])
 # Example:
 #   download_dependency_mod(user95401/geode-game-objects-factory user95401.game-objects-factory)
 #   download_dependency_mod(user95401/geode-game-objects-factory user95401.game-objects-factory FALSE)
 set(GEODE_DEPS_DIR "${CMAKE_BINARY_DIR}/geode-deps/")
 function(download_dependency_mod REPO_NAME DEPENDENCY_ID)
     # Parse optional arguments
-    set(CREATE_JSON TRUE) # Default value
+    set(REQUIRED TRUE) # Default value
     if(ARGC GREATER 2)
-        set(CREATE_JSON ${ARGV2})
+        set(REQUIRED ${ARGV2})
     endif()
 
     # Validate input parameters
@@ -21,7 +21,7 @@ function(download_dependency_mod REPO_NAME DEPENDENCY_ID)
     set(OPTIONS_FILE "${DEPS_DIR}/geode-dep-options.json")
     
     # Check if dependency is already downloaded and extracted
-    if(EXISTS "${OPTIONS_FILE}" OR (EXISTS "${DEPS_DIR}" AND NOT CREATE_JSON))
+    if(EXISTS "${OPTIONS_FILE}")
         message(STATUS "Dependency '${DEPENDENCY_ID}' already exists, skipping download")
         return()
     endif()
@@ -66,11 +66,6 @@ function(download_dependency_mod REPO_NAME DEPENDENCY_ID)
     # Remove the downloaded archive to avoid errors in combine workflow part
     file(REMOVE "${GEODE_FILE}")
     
-    # Create geode-dep-options.json only if requested
-    if(CREATE_JSON)
-        file(WRITE "${OPTIONS_FILE}" "{ \"required\": true }")
-        message(STATUS "Successfully installed dependency with JSON: '${DEPENDENCY_ID}'")
-    else()
-        message(STATUS "Successfully installed dependency (without JSON): '${DEPENDENCY_ID}'")
-    endif()
+    file(WRITE "${OPTIONS_FILE}" "{ \"required\": ${REQUIRED} }")
+    message(STATUS "Successfully installed dependency: '${DEPENDENCY_ID}' (required: ${REQUIRED})")
 endfunction()
