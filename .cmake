@@ -66,6 +66,13 @@ function(download_dependency_mod REPO_NAME DEPENDENCY_ID)
     # Remove the downloaded archive to avoid errors in combine workflow part
     file(REMOVE "${GEODE_FILE}")
     
-    file(WRITE "${OPTIONS_FILE}" "{ \"required\": ${REQUIRED} }")
+    if(REQUIRED)
+        set(JSON_REQUIRED "true")
+    else()
+        set(JSON_REQUIRED "false")
+    endif()
+
+    file(WRITE "${OPTIONS_FILE}" "{ \"required\": ${JSON_REQUIRED} }")
+
     message(STATUS "Successfully installed dependency: '${DEPENDENCY_ID}' (required: ${REQUIRED})")
 endfunction()
