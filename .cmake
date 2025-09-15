@@ -2,8 +2,9 @@
 # Usage:
 #   download_dependency_mod(owner/repo-name mod.id [CREATE_JSON])
 # Example:
-#   download_dependency_mod(user95401/geode-game-objects-factory user95401.game-objects-factory) # JSON создаётся
-#   download_dependency_mod(user95401/geode-game-objects-factory user95401.game-objects-factory FALSE) # Без JSON
+#   download_dependency_mod(user95401/geode-game-objects-factory user95401.game-objects-factory)
+#   download_dependency_mod(user95401/geode-game-objects-factory user95401.game-objects-factory FALSE)
+set(GEODE_DEPS_DIR "${CMAKE_BINARY_DIR}/geode-deps/")
 function(download_dependency_mod REPO_NAME DEPENDENCY_ID)
     # Parse optional arguments
     set(CREATE_JSON TRUE) # Default value
